@@ -34,7 +34,19 @@ export class FormularioComponent implements OnInit {
 
   onGuardarPersona(){
     const personaAGuardar = new Persona(this.idPersona, this.nombreInput);
-    this.personaService.agregarPersona(personaAGuardar);
+    if (this.idPersona != null){
+      this.personaService.modificarPersona(this.idPersona, personaAGuardar);
+    }else{
+      this.personaService.agregarPersona(personaAGuardar);
+    }
+    this.router.navigate(['personas']);
+  }
+
+  onEliminarPersona(){
+    if(this.idPersona != null){
+      console.log('Persona a eliminar: ' + this.idPersona);
+      this.personaService.eliminarPersona(this.idPersona);
+    }
     this.router.navigate(['personas']);
   }
 
